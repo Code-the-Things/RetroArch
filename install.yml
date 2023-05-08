@@ -39,6 +39,6 @@
 
       - name: Import SNES
         unarchive:
-          src: {{ SNES }}
+          src: "{{ SNES }}"
           dest: /media/SNES
           remote_src: yes
