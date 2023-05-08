@@ -13,7 +13,7 @@ Start-BitsTransfer -Source $installer -Destination ($destination + "\retroarch.e
 
 ($destination + "\retroarch.exe") /S
 
-Start-Sleep 30
+Start-Sleep 15
 
 # Grab ROMs
 Start-BitsTransfer -Source $SNES -Destination ($destination + '\snes.rar') -Dynamic
