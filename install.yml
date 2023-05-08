@@ -21,7 +21,17 @@
             - xfce4
             - xfce4-goodies
             - xrdp
+            - 7zip
+            - open-vm-tools-desktop
           state: present
+
+      - name: Install Cores
+        package:
+          name:
+            - libretro-snes9x
+            - libretro-genesisplusgx
+            - libretro-mgba
+          state: present 
 
       - name: Create Required Directories
         file:
@@ -36,9 +46,10 @@
           - /media/Genisis
           - /media/NES
           - /media/SNES
+          - /tmp/downloads
 
       - name: Import SNES
-        unarchive:
-          src: "{{ SNES }}"
+        shell:
+          cmd: "{{ SNES }}"
           dest: /media/SNES
           remote_src: yes
