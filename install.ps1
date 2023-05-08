@@ -4,9 +4,12 @@ $ProgressPreference = 'SilentlyContinue'
 # Variables
 $installer = 'https://buildbot.libretro.com/stable/1.15.0/windows/x86_64/RetroArch-Win64-setup.exe'
 #$7zip = 'https://www.7-zip.org/a/7z2201-x64.exe'
-$destination = 'C:\Users\Public\Downloads\RetroArch\'
+$destination = 'C:\RA\'
 $SNES = "<%= archives.link('ROMs', 'SNES Roms.rar', 1200) %>"
 $NES = "<%= archives.link('ROMs', 'NESMerge201.rar', 1200) %>"
+
+# Create Directories
+New-Item -Path $destination -ItemType Directory
 
 # Install RetroArch
 Start-BitsTransfer -Source $installer -Destination ($destination + "retroarch.exe")
@@ -37,6 +40,7 @@ if (!(get-module 7Zip4PowerShell)) {
 $archives = Get-ChildItem -Path $destination -Recurse -Include "*.zip", "*.rar", "*.7z"
 
 foreach ($archive in $archives) {
+    New-Item -Path ("c:\ROMs\" + $archive.BaseName) -ItemType Directory
     Expand-7Zip -ArchiveFileName $archive -TargetPath ("c:\ROMs\" + $archive.BaseName)
 }
 
