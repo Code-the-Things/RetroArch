@@ -4,21 +4,21 @@ $ProgressPreference = 'SilentlyContinue'
 # Variables
 $installer = 'https://buildbot.libretro.com/stable/1.15.0/windows/x86_64/RetroArch-Win64-setup.exe'
 #$7zip = 'https://www.7-zip.org/a/7z2201-x64.exe'
-$destination = 'C:\Users\Public\Downloads\RetroArch'
+$destination = 'C:\Users\Public\Downloads\RetroArch\'
 $SNES = "<%= archives.link('ROMs', 'SNES Roms.rar', 1200) %>"
 $NES = "<%= archives.link('ROMs', 'NESMerge201.rar', 1200) %>"
 
 # Install RetroArch
-Start-BitsTransfer -Source $installer -Destination ($destination + "\retroarch.exe")
+Start-BitsTransfer -Source $installer -Destination ($destination + "retroarch.exe")
 
-($destination + "\retroarch.exe") /S
+Execute-Process -Path ($destination + "retroarch.exe") -Parameters "/S" -WindowStyle Hidden
 
 Start-Sleep 15
 
 # Grab ROMs
-Start-BitsTransfer -Source $SNES -Destination ($destination + '\snes.rar') -Dynamic
+Start-BitsTransfer -Source $SNES -Destination ($destination + 'snes.rar') -Dynamic
 
-Start-BitsTransfer -Source $NES -Destination ($destination + '\nes.rar') -Dynamic
+Start-BitsTransfer -Source $NES -Destination ($destination + 'nes.rar') -Dynamic
 
 # Install 7-Zip
 # if (!(get-package 7-zip*)) {
