@@ -1,4 +1,7 @@
 ---
+  # set vars for archive dynamic urls with -e "SNES=<%= archives.link('ROMs', 'SNES Roms.rar', 1200) %>"
+  #
+
   - name: Install RetroArch
     hosts: all
     gather_facts: true
@@ -19,3 +22,23 @@
             - xfce4-goodies
             - xrdp
           state: present
+
+      - name: Create Required Directories
+        file:
+          path: "{{ item }}"
+          state: directory
+          owner: root
+          group: root
+          mode: 0777
+        loop:
+          - /media/GameboyAdvanced
+          - /media/GameboyMono
+          - /media/Genisis
+          - /media/NES
+          - /media/SNES
+
+      - name: Import SNES
+        unarchive:
+          src: {{ SNES }}
+          dest: /media/SNES
+          remote_src: yes
