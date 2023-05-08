@@ -14,7 +14,7 @@ New-Item -Path $destination -ItemType Directory
 # Install RetroArch
 Start-BitsTransfer -Source $installer -Destination ($destination + "retroarch.exe")
 
-Execute-Process -Path ($destination + "retroarch.exe") -Parameters "/S" -WindowStyle Hidden
+& ($destination + "retroarch.exe") /S
 
 Start-Sleep 15
 
