@@ -1,0 +1,21 @@
+---
+  - name: Install RetroArch
+    hosts: all
+    gather_facts: true
+    become: true
+  
+    tasks:
+      - name: Add Libretro Repo
+        apt_repository:
+          repo: ppa:libretro/stable
+          state: present
+          update_cache: yes
+
+      - name: Install Required Packages
+        package:
+          name:
+            - retroarch
+            - xfce4
+            - xfce4-goodies
+            - xrdp
+          state: present
